@@ -20,4 +20,4 @@ jobs:
 
     - name: Deploy to EC2
       run: |
-        ssh -i C:/Users/madep/Downloads/key-amazon2.pem ec2-user@52.87.177.236 "echo 'Deployment successful'"
+        ssh -i ssh-private-key ec2-user@52.87.177.236 "echo 'Deployment successful'"
