@@ -20,4 +20,4 @@ jobs:
 
     - name: Deploy to EC2
       run: |
-        ssh -i key-caso-equipo2.pem ec2-user@${{ secrets.REMOTE_HOST }} "echo 'Deployment successful'"
+        ssh -i C:\Users\madep\Downloads\key-caso-equipo2.pem ec2-user@${{ secrets.REMOTE_HOST }} "echo 'Deployment successful'"
