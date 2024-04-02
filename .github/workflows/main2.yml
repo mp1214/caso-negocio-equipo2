@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      SSH_PRIVATE_KEY: ${{ secrets.PEM_FILE }}
+      SSH_PRIVATE_KEY: ${{ secrets.KEY_PEM_PC }}
       REMOTE_USER: ec2-user
-      REMOTE_HOST: DireccionIPPublica
+      REMOTE_HOST:  ${{ secrets.IP_PUBLICA_EC2 }}
       APP_NAME: app.js
 
     steps:
