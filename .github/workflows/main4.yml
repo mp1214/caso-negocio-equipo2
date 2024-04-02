@@ -10,6 +10,7 @@ env:
   REMOTE_USER: ec2-user
   REMOTE_HOST: ${{ secrets.IP_PUBLICA_EC2 }}
   APP_NAME: app.js
+  AWS_DEFAULT_REGION: us-east-1
 
 jobs:
   ssh:
