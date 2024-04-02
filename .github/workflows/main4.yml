@@ -31,6 +31,6 @@ jobs:
       with:
         host: ${{ env.REMOTE_HOST }}
         username: ${{ env.REMOTE_USER }}
-        key: ${{ secrets.PEM_FILE }}
+        key: ${{ secrets.KEY_PEM_PC }}
         script: |
           sudo rm -rf /opt/montoto || true
