@@ -20,4 +20,4 @@ jobs:
 
     - name: Deploy to EC2
       run: |
-        ssh -i ssh-private-key ec2-user@${{ secrets.IP_PUBLICA_EC2 }} "echo 'Deployment successful'"
+        ssh -i ${{ secrets.PEM_FILE }} ec2-user@${{ secrets.IP_PUBLICA_EC2 }} "echo 'Deployment successful'"
