@@ -6,10 +6,16 @@ on:
       - ventas
 
 jobs:
+
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Verificar secretos
+      run: |
+        echo "PEM_FILE: ${{ secrets.PEM_FILE }}"
+        echo "IP_PUBLICA_EC2: ${{ secrets.IP_PUBLICA_EC2 }}"
+
     - name: Checkout code
       uses: actions/checkout@v2
 
