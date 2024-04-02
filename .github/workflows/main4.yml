@@ -1,0 +1,36 @@
+name: SSH Connection
+
+on:
+  push:
+    branches:
+      - ventas
+
+env:
+  SSH_PRIVATE_KEY: ${{ secrets.KEY_PEM_PC }}
+  REMOTE_USER: ec2-user
+  REMOTE_HOST: ${{ secrets.IP_PUBLICA_EC2 }}
+  APP_NAME: app.js
+  AWS_DEFAULT_REGION: us-east-1
+
+jobs:
+  ssh:
+    name: SSH Connection
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ env.SSH_PRIVATE_KEY }}
+        
+    - name: Connect via SSH
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ env.REMOTE_HOST }}
+        username: ${{ env.REMOTE_USER }}
+        key: ${{ secrets.KEY_PEM_PC }}
+        script: |
+          sudo rm -rf /opt/montoto || true
