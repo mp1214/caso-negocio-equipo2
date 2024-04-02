@@ -1,0 +1,22 @@
+name: Implementar
+
+on:
+  push:
+    branches: [ventas]
+
+jobs:
+  implementar:
+    name: Implementar en EC2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v2
+
+      - name: Configurar entorno y claves SSH
+        env:
+          PRIVATE_KEY: ${{ secrets.KEY_PEM_PC }}
+          HOSTNAME: ${{ secrets.IP_PUBLICA_EC2 }}
+          USER_NAME: ${{ secrets.HOST_NAME }}
+        run: |
+          echo "$PRIVATE_KEY" > clave_privada && chmod 600 clave_privada 
+          ssh -o StrictHostKeyChecking=no -i clave_privada ${USER_NAME}@${HOSTNAME}
