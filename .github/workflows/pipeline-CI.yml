@@ -3,7 +3,7 @@ name: CI Pipeline - DEV Environment
 on:
   push:
     branches:
-      - main
+      - ventas
 
 jobs:
   build:
