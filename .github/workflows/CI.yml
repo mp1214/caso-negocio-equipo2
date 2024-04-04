@@ -58,7 +58,7 @@ jobs:
           username: ec2-user
           key: ${{ secrets.KEY_PEM_PC }}
           script: |
-            cd /home/ec2-user
+            cd /home/ec2-user/DirectorioPatricia
             pm2 start app.js
 
       - name: Check if service is running
