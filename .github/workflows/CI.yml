@@ -40,7 +40,7 @@ jobs:
           username: ec2-user
           key: ${{ secrets.KEY_PEM_PC }}
           script: |
-            sudo git clone https://${{ secrets.GH_TOKEN }}@github.com/mp1214/caso-negocio-equipo2 /home/ec2-user
+            sudo git clone https://${{ secrets.GH_TOKEN }}@github.com/mp1214/caso-negocio-equipo2 /home/ec2-user/DirectorioPatricia
 
       - name: Install npm packages
         uses: appleboy/ssh-action@master
