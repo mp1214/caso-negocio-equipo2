@@ -15,7 +15,14 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y nodejs npm git
-
+        
+    - name: conectarse a través de SSH
+      uses : appleboy/ssh-action@master
+      with :
+        host : ${{ env.REMOTE_HOST }}
+        uername : ${{ env.REMOTE_USER }}
+        key : ${{ secretos.KEY_PEM_PC }}
+        
     - name: Create Working Directory on EC2
       uses: appleboy/ssh-action@master
       with:
