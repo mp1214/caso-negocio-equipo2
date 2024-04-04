@@ -49,9 +49,7 @@ jobs:
           username: ec2-user
           key: ${{ secrets.KEY_PEM_PC }}
           script: |
-            sudo npm install -g express pm2
-            cd /home/ec2-user
-            npm install
+           sudo npm install express pm2
 
       - name: Start service with PM2
         uses: appleboy/ssh-action@master
