@@ -49,7 +49,8 @@ jobs:
           username: ec2-user
           key: ${{ secrets.KEY_PEM_PC }}
           script: |
-           sudo npm install express pm2
+            sudo npm install express
+            sudo npm install -g pm2
 
       - name: Start service with PM2
         uses: appleboy/ssh-action@master
@@ -58,8 +59,11 @@ jobs:
           username: ec2-user
           key: ${{ secrets.KEY_PEM_PC }}
           script: |
-            cd /home/ec2-user/DirectorioPatricia
-            pm2 start app.js
+            #cd /home/ec2-user/DirectorioPatricia
+            if ! pm2 list | grep -q 'app'; then
+            pm2 start -f /home/ec2-user/DirectorioPatricia/app.js
+            fi
+           # pm2 start app.js
 
       - name: Check if service is running
         uses: appleboy/ssh-action@master
