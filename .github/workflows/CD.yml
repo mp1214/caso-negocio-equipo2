@@ -1,9 +1,7 @@
 name: Continuous Delivery Pipeline
 
 on:
-  push:
-    branches:
-      - auditoria
+  workflow_dispatch:
 
 jobs:
   deploy:
