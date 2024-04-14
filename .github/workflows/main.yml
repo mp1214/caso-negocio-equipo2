@@ -1,0 +1,54 @@
+name: Continuous Delivery Pipeline
+
+on:
+  push:
+    branches:
+      - auditoria
+
+jobs:
+  deploy:
+    name: Deploy to Environment
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Docker (if not already installed)
+      if: steps.docker-check.outputs.docker-installed != 'true'
+      id: install-docker
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker.io
+        sudo usermod -aG docker $USER
+        docker --version
+
+    - name: Check Docker installation
+      id: docker-check
+      run: docker --version
+      continue-on-error: true
+      # Outputs
+     
+
+    - name: Build Docker Image
+      run: docker build -t mp1214/deployQA .
+
+    - name: Log in to DockerHub
+      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Push to DockerHub
+      run: docker push mp1214/deployQA
+
+    - name: Deploy to Environment
+      if: github.event_name == 'workflow_dispatch'
+      run: |
+        # Your deployment script goes here
+        echo "Deploying to environment..."
+
+    - name: Verify Service Running
+      if: github.event_name == 'workflow_dispatch'
+      run: |
+        # Your verification script goes here
+        echo "Verifying service is running..."
+
+# You may need to add more steps for deployment and verification depending on your specific setup
