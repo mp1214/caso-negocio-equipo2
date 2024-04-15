@@ -15,13 +15,13 @@ jobs:
         
 
     - name: Build Docker Image
-      run: docker build -t mp1214/deployQA .
+      run: docker build -t mp1214/deployqa .
 
     - name: Log in to DockerHub
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Push to DockerHub
-      run: docker push mp1214/deployQA
+      run: docker push mp1214/deployqa
 
     - name: Deploy to Environment
       if: github.event_name == 'workflow_dispatch'
