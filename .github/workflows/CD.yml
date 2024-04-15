@@ -12,16 +12,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-        
+    - name: Login to Docker Hub
+      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag mp1214/deployqa-k6:latest   
+    
+    - name: Push the Docker image to Docker Hub
+      run: docker push mp1214/deployqa-k6:latest    
 
-    - name: Build Docker Image
-      run: docker build -t mp1214/deployqa .
-
-    - name: Log in to DockerHub
-      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-    - name: Push to DockerHub
-      run: docker push mp1214/deployqa
+    
 
     - name: Deploy to Environment
       if: github.event_name == 'workflow_dispatch'
