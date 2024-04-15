@@ -12,21 +12,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install Docker (if not already installed)
-      if: steps.docker-check.outputs.docker-installed != 'true'
-      id: install-docker
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y docker.io
-        sudo usermod -aG docker $USER
-        docker --version
-
-    - name: Check Docker installation
-      id: docker-check
-      run: docker --version
-      continue-on-error: true
-      # Outputs
-     
+        
 
     - name: Build Docker Image
       run: docker build -t mp1214/deployQA .
